@@ -8,9 +8,9 @@ const User = user.User;
 const order = require("../models/order");
 const Order = order.Order;
 
-// ===== 插桩：导入assert模块 =====
+// ===== INSTRUMENTATION: Import assert module =====
 const assert = require('assert');
-// =================================
+// =================================================
 
 module.exports = (app) => {
 
@@ -18,7 +18,7 @@ module.exports = (app) => {
   app.get("/orders/user/:userID", authenticateToken, async (req, res) => {
     try {
 
-      // ===== 插桩1：记录权限检查 =====
+      // ===== INSTRUMENTATION 1: Log permission check =====
       console.log('[ORDERS] Admin access check:', {
         userId: req.user.id,
         userRole: req.user.role,
@@ -26,13 +26,13 @@ module.exports = (app) => {
         endpoint: '/orders/user/:userID',
         timestamp: new Date().toISOString()
       });
-      // =================================
+      // ===================================================
 
       // This is an admin-only operation.
       if(req.user.role !== "Admin") {
-        // ===== 插桩：记录权限拒绝 =====
+        // ===== INSTRUMENTATION: Log permission denied =====
         console.log('[ORDERS] Access denied: Not admin');
-        // =================================
+        // ==================================================
         return res.status(403).json({
           "message": "Unauthorized Access."
         });
@@ -81,7 +81,7 @@ module.exports = (app) => {
         return res.status(404).json({
           "message": "No order found."
         });
-      }    
+      }
     } catch(error) {
       return res.status(400).json({
         "message": "Bad Request."
@@ -92,30 +92,30 @@ module.exports = (app) => {
   /* Add a new order. Admins can NOT add orders for other members. */
   app.post("/order", authenticateToken, async (req, res) => {
     try {
-      // ===== 插桩2：记录订单创建和性能计时 =====
+      // ===== INSTRUMENTATION 2: Log order creation and performance timing =====
       const startTime = Date.now();
       console.log('[ORDERS] Creating new order:', {
         userId: req.user.id,
         orderData: req.body,
         timestamp: new Date().toISOString()
       });
-      
-      // 验证订单数据完整性
+
+      // Validate order data integrity (commented out - for demonstration)
       //assert(req.body.items, 'Order must contain items');
       //assert(Array.isArray(req.body.items), 'Items must be an array');
       //assert(req.body.items.length > 0, 'Order must have at least one item');
-      
+
       console.log('[ORDERS] Order validation passed');
-      // =================================
-      
+      // ========================================================================
+
       const newOrder = new Order({ ...req.body });
       newOrder.user = req.user.id;
       const userExists = await User.exists({ _id: req.user.id });
       // Obtain orders only if respective user exists.
       if(userExists) {
         const insertedOrder = await newOrder.save();
-        
-        // ===== 插桩：记录创建成功和性能 =====
+
+        // ===== INSTRUMENTATION: Log creation success and performance =====
         const duration = Date.now() - startTime;
         console.log('[ORDERS] Order created successfully:', {
           orderId: insertedOrder._id,
@@ -123,35 +123,35 @@ module.exports = (app) => {
           duration: duration + 'ms',
           timestamp: new Date().toISOString()
         });
-        
+
         if (duration > 500) {
           console.warn('[ORDERS] PERFORMANCE WARNING: Slow order creation:', {
             duration: duration + 'ms',
             threshold: '500ms'
           });
         }
-        // =================================
-        
+        // =================================================================
+
         return res.status(201).json(insertedOrder);
       } else {
-        // ===== 插桩：记录用户不存在错误 =====
+        // ===== INSTRUMENTATION: Log user not found error =====
         console.log('[ORDERS] Order creation failed: User does not exist:', {
           userId: req.user.id,
           timestamp: new Date().toISOString()
         });
-        // =================================
+        // =====================================================
         return res.status(400).json({
           "message": "No user associated with order."
         });
       }
     } catch(error) {
-      // ===== 插桩：增强错误日志 =====
+      // ===== INSTRUMENTATION: Enhanced error logging =====
       console.log('[ORDERS] Order creation error:', {
         error: error.message,
         userId: req.user.id,
         timestamp: new Date().toISOString()
       });
-      // =================================
+      // ===================================================
       return res.status(400).json({
         "message": "Bad Request."
       });
