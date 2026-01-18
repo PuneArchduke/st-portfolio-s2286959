@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "test": "jest --setupFiles dotenv/config --forceExit && node db-cleanup.js",
+    "test:coverage": "nyc npm test"
+  }
+}

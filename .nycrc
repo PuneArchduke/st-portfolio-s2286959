@@ -1,0 +1,17 @@
+{
+  "all": true,
+  "include": [
+    "endpoints/**/*.js",
+    "models/**/*.js"
+  ],
+  "exclude": [
+    "**/__tests__/**",
+    "coverage/**",
+    "node_modules/**",
+    "*.config.js",
+    "server.js",
+    "db-cleanup.js"
+  ],
+  "reporter": ["text", "html", "lcov"],
+  "check-coverage": false
+}

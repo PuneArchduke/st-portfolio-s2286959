@@ -1,0 +1,545 @@
+
+> st-sample-project@0.1.0 test
+> jest --setupFiles dotenv/config --forceExit && node db-cleanup.js --coverage --coverageReporters=text --coverageReporters=html
+
+(node:8264) [MONGOOSE] DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[dotenv@17.2.3] injecting env (3) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+PASS __tests__/db/db.test.js
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+[AUTH] Authentication attempt: {
+  path: '/users',
+  method: 'GET',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.570Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/orders/all',
+  method: 'GET',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.571Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/orders/user/696cefa61f7d2e620a4b640a',
+  method: 'GET',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.572Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/order',
+  method: 'POST',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.574Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/order',
+  method: 'PUT',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.575Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/order/12345',
+  method: 'DELETE',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.576Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/me',
+  method: 'PUT',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.577Z'
+}
+[AUTH] Authentication failed: No token provided
+[AUTH] Authentication attempt: {
+  path: '/user/12345',
+  method: 'DELETE',
+  hasAuthHeader: false,
+  timestamp: '2026-01-18T14:35:19.578Z'
+}
+[AUTH] Authentication failed: No token provided
+Error: data and salt arguments required
+    at Object.hashSync (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\bcrypt\bcrypt.js:87:15)
+    at C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\endpoints\users.js:32:32
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+Error: User validation failed: name: Path `name` is required.
+    at ValidationError.inspect (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:897:19)
+    at inspect (node:internal/util/inspect:409:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2645:40)
+    at formatWithOptions (node:internal/util/inspect:2507:10)
+    at console.value (node:internal/console/constructor:360:14)
+    at console.log (node:internal/console/constructor:416:61)
+    at C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\endpoints\users.js:42:15
+    at processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errors: {
+    name: ValidatorError: Path `name` is required.
+        at validate (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\schematype.js:1347:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\schematype.js:1331:7)
+        at C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\document.js:2977:18
+        at processTicksAndRejections (node:internal/process/task_queues:84:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'name',
+      value: undefined,
+      reason: undefined,
+      Symbol(mongoose:validatorError): true
+    }
+  },
+  _message: 'User validation failed'
+}
+Error: User validation failed: address: Path `address` is required.
+    at ValidationError.inspect (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:897:19)
+    at inspect (node:internal/util/inspect:409:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2645:40)
+    at formatWithOptions (node:internal/util/inspect:2507:10)
+    at console.value (node:internal/console/constructor:360:14)
+    at console.log (node:internal/console/constructor:416:61)
+    at C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\endpoints\users.js:42:15
+    at processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  errors: {
+    address: ValidatorError: Path `address` is required.
+        at validate (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\schematype.js:1347:13)
+        at SchemaString.SchemaType.doValidate (C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\schematype.js:1331:7)
+        at C:\Users\Charles Jiang\OneDrive\Desktop\Start\Myed\year4-1\ST\st-portfolio-s-2286959-master\node_modules\mongoose\lib\document.js:2977:18
+        at processTicksAndRejections (node:internal/process/task_queues:84:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'address',
+      value: undefined,
+      reason: undefined,
+      Symbol(mongoose:validatorError): true
+    }
+  },
+  _message: 'User validation failed'
+}
+PASS __tests__/api/api.users-generic.test.js
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+[AUTH] Authentication attempt: {
+  path: '/user/696cefa71f7d2e620a4b6425',
+  method: 'DELETE',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.696Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.698Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/orders/all',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.700Z'
+}
+[AUTH] User not found in database: {
+  userId: '696cefa71f7d2e620a4b6425',
+  timestamp: '2026-01-18T14:35:19.701Z'
+}
+PASS __tests__/api/api.users-admin.test.js
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+[AUTH] Authentication attempt: {
+  path: '/users',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.836Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.837Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/orders/all',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.840Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.841Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/orders/user/696cefa61f7d2e620a4b6410',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.843Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.844Z'
+}
+[ORDERS] Admin access check: {
+  userId: '696cefa61f7d2e620a4b640a',
+  userRole: 'Admin',
+  requestedUserID: '696cefa61f7d2e620a4b6410',
+  endpoint: '/orders/user/:userID',
+  timestamp: '2026-01-18T14:35:19.844Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/user/nouser',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.847Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.847Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order',
+  method: 'POST',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.849Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.850Z'
+}
+[ORDERS] Creating new order: {
+  userId: '696cefa61f7d2e620a4b640a',
+  orderData: { type: 'Box2', description: '{Test Order}' },
+  timestamp: '2026-01-18T14:35:19.850Z'
+}
+[ORDERS] Order validation passed
+[ORDERS] Order created successfully: {
+  orderId: new ObjectId("696cefa71f7d2e620a4b6439"),
+  userId: '696cefa61f7d2e620a4b640a',
+  duration: '2ms',
+  timestamp: '2026-01-18T14:35:19.852Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order/696cefa71f7d2e620a4b6439',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.853Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.854Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/user/696cefa61f7d2e620a4b6413',
+  method: 'DELETE',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.856Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.857Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/user/696cefa61f7d2e620a4b640d',
+  method: 'DELETE',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.859Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b640a',
+  role: 'Admin',
+  timestamp: '2026-01-18T14:35:19.860Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/users',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:19.997Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.000Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/me',
+  method: 'PUT',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.058Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.060Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/me',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.069Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.071Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/me',
+  method: 'PUT',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.075Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.077Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/orders/all',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.080Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.082Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order',
+  method: 'POST',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.086Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.088Z'
+}
+[ORDERS] Creating new order: {
+  userId: '696cefa61f7d2e620a4b6410',
+  orderData: { type: 'Box1', description: '{Test Order}' },
+  timestamp: '2026-01-18T14:35:20.088Z'
+}
+[ORDERS] Order validation passed
+[ORDERS] Order created successfully: {
+  orderId: new ObjectId("696cefa81f7d2e620a4b6450"),
+  userId: '696cefa61f7d2e620a4b6410',
+  duration: '3ms',
+  timestamp: '2026-01-18T14:35:20.091Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/orders/all',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.092Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.094Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order/696cefa81f7d2e620a4b6450',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.097Z'
+}
+PASS __tests__/api/api.users-simple.test.js
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.099Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order',
+  method: 'POST',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.102Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.103Z'
+}
+[ORDERS] Creating new order: {
+  userId: '696cefa61f7d2e620a4b6410',
+  orderData: { type: 'Box2' },
+  timestamp: '2026-01-18T14:35:20.103Z'
+}
+[ORDERS] Order validation passed
+[ORDERS] Order created successfully: {
+  orderId: new ObjectId("696cefa81f7d2e620a4b6458"),
+  userId: '696cefa61f7d2e620a4b6410',
+  duration: '3ms',
+  timestamp: '2026-01-18T14:35:20.106Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order/',
+  method: 'PUT',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.107Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.108Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order/696cefa81f7d2e620a4b6458',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.113Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.114Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order',
+  method: 'POST',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.117Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.119Z'
+}
+[ORDERS] Creating new order: {
+  userId: '696cefa61f7d2e620a4b6410',
+  orderData: { type: 'Box2', description: '{Test Order}' },
+  timestamp: '2026-01-18T14:35:20.119Z'
+}
+[ORDERS] Order validation passed
+[ORDERS] Order created successfully: {
+  orderId: new ObjectId("696cefa81f7d2e620a4b6461"),
+  userId: '696cefa61f7d2e620a4b6410',
+  duration: '2ms',
+  timestamp: '2026-01-18T14:35:20.121Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order/696cefa81f7d2e620a4b6461',
+  method: 'DELETE',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.122Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.124Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/order/696cefa81f7d2e620a4b6461',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.127Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.129Z'
+}
+[AUTH] Authentication attempt: {
+  path: '/orders/user/696cefa61f7d2e620a4b640a',
+  method: 'GET',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.131Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.132Z'
+}
+[ORDERS] Admin access check: {
+  userId: '696cefa61f7d2e620a4b6410',
+  userRole: 'User',
+  requestedUserID: '696cefa61f7d2e620a4b640a',
+  endpoint: '/orders/user/:userID',
+  timestamp: '2026-01-18T14:35:20.132Z'
+}
+[ORDERS] Access denied: Not admin
+[AUTH] Authentication attempt: {
+  path: '/user/696cefa61f7d2e620a4b640a',
+  method: 'DELETE',
+  hasAuthHeader: true,
+  timestamp: '2026-01-18T14:35:20.133Z'
+}
+[AUTH] Authentication successful: {
+  userId: '696cefa61f7d2e620a4b6410',
+  role: 'User',
+  timestamp: '2026-01-18T14:35:20.134Z'
+}
+PASS __tests__/app/app.performance.test.js
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS __tests__/app/app.unit.test.js
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+
+Test Suites: 6 passed, 6 total
+Tests:       42 passed, 42 total
+Snapshots:   0 total
+Time:        1.457 s
+Ran all test suites.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
+[dotenv@17.2.3] injecting env (7) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+DB Cleanup complete.
+node:internal/dns/promises:294
+    this.reject(new DNSException(err, this.bindingName, this.hostname));
+                ^
+
+Error: querySrv ENOTFOUND _mongodb._tcp.cluster0.vxmwvf1.mongodb.net
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:294:17) {
+  errno: undefined,
+  code: 'ENOTFOUND',
+  syscall: 'querySrv',
+  hostname: '_mongodb._tcp.cluster0.vxmwvf1.mongodb.net'
+}
+
+Node.js v24.12.0
