@@ -40,9 +40,24 @@ if (token === null || token === undefined){
 
 **Issue 2: No Token Expiration Validation Feedback**
 
+```javascript
+// Current: Generic error for all JWT failures
+if (error) {
+  return res.status(403).send({"message": "Unauthorized access."});
+}
+```
+
 **Problem:** Client cannot distinguish between expired token vs malformed token
 **Severity:** Low
 **Recommendation:** Provide specific error messages for different JWT failure modes.
+
+```javascript
+if (error.name === 'TokenExpiredError') {
+  return res.status(401).send({"message": "Token expired. Please login again."});
+} else if (error.name === 'JsonWebTokenError') {
+  return res.status(403).send({"message": "Invalid token."});
+}
+```
 
 ---
 
@@ -52,13 +67,43 @@ if (token === null || token === undefined){
 **Severity:** High (Security)
 **Recommendation:** Add express-rate-limit middleware.
 
+```javascript
+const rateLimit = require('express-rate-limit');
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5 // limit each IP to 5 requests per windowMs
+});
+app.use('/login', authLimiter);
+```
+
 ---
 
 **Issue 4: Synchronous Database Query in Async Context**
 
+```javascript
+// Current code uses .then() callback
+User.findOne({_id: user.id}).then(userFound => {
+  // ...
+});
+```
+
 **Problem:** Mixing callback style with modern async patterns
 **Severity:** Low (Maintainability)
 **Recommendation:** Use async/await for consistency.
+
+```javascript
+const authenticateToken = async (req, res, next) => {
+  try {
+    const userFound = await User.findOne({_id: user.id});
+    if (!userFound) {
+      return res.status(403).send({"message": "Unauthorized access."});
+    }
+    // ...
+  } catch (error) {
+    return res.status(500).send({"message": "Internal server error."});
+  }
+};
+```
 
 ---
 
@@ -70,33 +115,111 @@ if (token === null || token === undefined){
 
 **Issue 5: Inconsistent Error Response Format**
 
+```javascript
+// Some endpoints return:
+return res.status(400).json({"message": "Bad Request."});
+
+// Others return:
+return res.status(403).json({"message": "Unauthorized Access."});
+```
+
 **Problem:** Inconsistent capitalization and punctuation in error messages
 **Severity:** Low (Maintainability)
 **Recommendation:** Standardize error response format.
+
+```javascript
+const ErrorResponses = {
+  BAD_REQUEST: { message: "Bad request", code: "BAD_REQUEST" },
+  UNAUTHORIZED: { message: "Unauthorized access", code: "UNAUTHORIZED" },
+  NOT_FOUND: { message: "Resource not found", code: "NOT_FOUND" }
+};
+```
 
 ---
 
 **Issue 6: No Input Validation for Order Data**
 
+```javascript
+// Current code - directly uses req.body without validation
+const newOrder = new Order({
+  user: req.user.id,
+  items: req.body.items,  // No validation!
+  // ...
+});
+```
+
 **Problem:** Missing validation for order items (Box1/Box2), quantities
 **Severity:** High (Security & Correctness)
 **Recommendation:** Add input validation before creating orders.
+
+```javascript
+const validateOrderInput = (items) => {
+  if (!Array.isArray(items) || items.length === 0) {
+    return { valid: false, error: "Items must be a non-empty array" };
+  }
+  for (const item of items) {
+    if (!['Box1', 'Box2'].includes(item.type)) {
+      return { valid: false, error: `Invalid item type: ${item.type}` };
+    }
+    if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
+      return { valid: false, error: "Quantity must be a positive integer" };
+    }
+  }
+  return { valid: true };
+};
+```
 
 ---
 
 **Issue 7: Missing Transaction for Order Operations**
 
+```javascript
+// Current: No transaction wrapper
+const newOrder = new Order({...});
+await newOrder.save();
+```
+
 **Problem:** If save fails partially, database could be in inconsistent state
 **Severity:** Medium
 **Recommendation:** Use MongoDB transactions for critical operations.
+
+```javascript
+const session = await mongoose.startSession();
+session.startTransaction();
+try {
+  await newOrder.save({ session });
+  await session.commitTransaction();
+} catch (error) {
+  await session.abortTransaction();
+  throw error;
+} finally {
+  session.endSession();
+}
+```
 
 ---
 
 **Issue 8: No Pagination for Order Listing**
 
+```javascript
+// Current: Returns all orders
+const allOrders = await Order.find({user: userID});
+```
+
 **Problem:** Could return thousands of records, causing performance issues
 **Severity:** Medium (Performance)
 **Recommendation:** Add pagination with skip/limit.
+
+```javascript
+const page = parseInt(req.query.page) || 1;
+const limit = parseInt(req.query.limit) || 10;
+const skip = (page - 1) * limit;
+
+const allOrders = await Order.find({user: userID})
+  .skip(skip)
+  .limit(limit)
+  .sort({ createdAt: -1 });
+```
 
 ---
 
@@ -106,17 +229,45 @@ if (token === null || token === undefined){
 
 **Issue 9: Password Not Validated for Strength**
 
+```javascript
+// Current: Only checks if password exists
+if (!req.body.password) {
+  return res.status(400).json({...});
+}
+```
+
 **Problem:** No minimum length, complexity requirements
 **Severity:** High (Security)
 **Recommendation:** Add password validation (min 8 chars, uppercase, number).
+
+```javascript
+const validatePassword = (password) => {
+  if (password.length < 8) return "Password must be at least 8 characters";
+  if (!/[A-Z]/.test(password)) return "Password must contain uppercase letter";
+  if (!/[0-9]/.test(password)) return "Password must contain a number";
+  return null; // valid
+};
+```
 
 ---
 
 **Issue 10: Email Not Normalized**
 
+```javascript
+// Current: Email stored as-is
+const newUser = new User({
+  email: req.body.email,  // "User@Example.COM" stored differently from "user@example.com"
+  // ...
+});
+```
+
 **Problem:** Same email with different casing could create duplicate accounts
 **Severity:** Medium
 **Recommendation:** Normalize email before storage (toLowerCase, trim).
+
+```javascript
+const normalizedEmail = req.body.email.toLowerCase().trim();
+```
 
 ---
 
@@ -336,7 +487,7 @@ Coverage Summary:
 
 **Repository:** https://github.com/PuneArchduke/st-portfolio-s2286959
 **Workflow:** Software Testing CI Pipeline
-**Run #4:** ✅ Success
+**Run #4:** Success
 
 ### Execution Timeline
 
@@ -408,7 +559,7 @@ Time:        8.234s
 | Pipeline constructed | GitHub Actions with MongoDB service container |
 | Testing automated | 42 tests automated via Jest |
 | Coverage automated | Istanbul/nyc integration with artifact upload |
-| Pipeline demonstration | ✅ Run #4 successful in 54 seconds |
+| Pipeline demonstration | Run #4 successful in 54 seconds |
 
 ### Key Achievements
 
