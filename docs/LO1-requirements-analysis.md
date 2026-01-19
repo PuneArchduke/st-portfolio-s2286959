@@ -347,10 +347,3 @@ The approach aligns with ISO 29119-2 in:
 The weaknesses identified (concurrency, fault tolerance) would be addressed in a full ISO 29119-compliant test plan but are consciously deferred given project scope constraints.
 
 ---
-
-## References
-
-- Pezzè, M., & Young, M. (Updated) Chapter 11: Combinatorial Testing
-- ISO/IEC/IEEE 29119-1: Software Testing Concepts and Definitions
-- ISO/IEC/IEEE 29119-2: Test Processes
-- Course Tutorial LO1: Requirements Analysis (2025/6)
