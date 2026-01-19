@@ -184,10 +184,10 @@ if (duration > 500) {
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Statement Coverage | 80% | 79.22% | ⚠ Slightly below |
-| Branch Coverage | 75% | 66.66% | ⚠ Below target |
-| Function Coverage | 80% | 90.9% | ✅ Exceeded |
-| Critical Paths (auth) | 90% | 92.3% | ✅ Achieved |
+| Statement Coverage | 80% | 79.22% | Slightly below |
+| Branch Coverage | 75% | 66.66% | Below target |
+| Function Coverage | 80% | 90.9% | Exceeded |
+| Critical Paths (auth) | 90% | 92.3% | Achieved |
 
 ### Requirement Traceability
 
@@ -195,27 +195,27 @@ Each test maps to requirements identified in LO1:
 
 | Requirement | Test Coverage | Evidence |
 |------------|---------------|----------|
-| FR1: User Registration | ✅ Complete | 6 test cases, 73.91% users.js coverage |
-| FR2: Role-Based Access | ✅ Verified | Admin tests, 80% auth.js branch coverage |
-| FR3: Order Placement | ⚠ Partial | 77.33% orders.js coverage |
-| FR4: Order Retrieval | ⚠ Partial | Admin and user retrieval tested |
-| SR1: Password Encryption | ✅ Verified | Bcrypt usage confirmed via code |
-| SR2: JWT Authentication | ✅ Complete | 92.3% auth.js coverage |
-| SR4: Authorization | ✅ Complete | 8 unauthorized access tests |
+| FR1: User Registration | Complete | 6 test cases, 73.91% users.js coverage |
+| FR2: Role-Based Access | Verified | Admin tests, 80% auth.js branch coverage |
+| FR3: Order Placement | Partial | 77.33% orders.js coverage |
+| FR4: Order Retrieval | Partial | Admin and user retrieval tested |
+| SR1: Password Encryption | Verified | Bcrypt usage confirmed via code |
+| SR2: JWT Authentication | Complete | 92.3% auth.js coverage |
+| SR4: Authorization | Complete | 8 unauthorized access tests |
 
 ### Test Quality Metrics
 
-**Test Isolation:** ✅
+**Test Isolation:** 
 - Each test case is independent
 - Database state managed via setup/teardown
 - No test interdependencies
 
-**Test Clarity:** ✅
+**Test Clarity:** 
 - Descriptive test names
 - Clear assertion messages
 - Good use of arrange-act-assert pattern
 
-**Error Coverage:** ✅
+**Error Coverage:** 
 - Both positive and negative test cases
 - Boundary conditions tested
 - Error responses validated
@@ -243,10 +243,10 @@ Time:        8.234s
 
 | Test Suite | Tests | Status |
 |------------|-------|--------|
-| api.users-generic.test.js | 12 | ✅ All passed |
-| api.users-admin.test.js | 18 | ✅ All passed |
-| app.unit.test.js | 3 | ✅ All passed |
-| db.test.js | 9 | ✅ All passed |
+| api.users-generic.test.js | 12 | All passed |
+| api.users-admin.test.js | 18 | All passed |
+| app.unit.test.js | 3 | All passed |
+| db.test.js | 9 | All passed |
 | **Total** | **42** | **100% pass rate** |
 
 ### Detailed Test Results
@@ -380,19 +380,19 @@ orders.js at 77.33% statement coverage:
 ### Confidence Level Assessment
 
 **High Confidence (>90% coverage):**
-- ✅ User authentication (auth.js: 92.3%)
-- ✅ JWT token handling
-- ✅ Password encryption flow
-- ✅ Data models (order.js, user.js: 100%)
+-  User authentication (auth.js: 92.3%)
+-  JWT token handling
+-  Password encryption flow
+-  Data models (order.js, user.js: 100%)
 
 **Medium Confidence (75-90% coverage):**
-- ⚠ Order management (orders.js: 77.33%)
-- ⚠ User profile operations (users.js: 73.91%)
+-  Order management (orders.js: 77.33%)
+-  User profile operations (users.js: 73.91%)
 
 **Areas Requiring Additional Testing:**
-- ❌ Concurrent user operations
-- ❌ Load testing under stress
-- ❌ Order update/delete edge cases
+-  Concurrent user operations
+-  Load testing under stress
+-  Order update/delete edge cases
 
 ### Comparison with Industry Standards
 
@@ -465,12 +465,3 @@ The identified gaps (branch coverage below 75% target, limited order management 
 For academic purposes, this portfolio demonstrates comprehensive testing knowledge, practical execution skills, and critical evaluation of test adequacy. The honest assessment of limitations alongside achieved results reflects professional judgment in software testing practice.
 
 ---
-
-## References
-
-- Pezzè, M., & Young, M. (Updated) Chapter 10: Functional Testing
-- Pezzè, M., & Young, M. (Updated) Chapter 12: Structural Testing
-- ISO/IEC/IEEE 29119-2: Test Processes
-- Course Tutorial LO3: Testing Techniques (2025/6)
-- Jest Documentation: https://jestjs.io/
-- Istanbul/nyc Documentation: https://istanbul.js.org/
