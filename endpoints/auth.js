@@ -3,13 +3,13 @@ var jwt = require("jsonwebtoken");
 const user = require("../models/user");
 const User = user.User;
 
-// ===== INSTRUMENTATION: Import assert module =====
+// ===== INSTRUMENTATION 1: Import assert module =====
 const assert = require('assert');
-// =================================================
+// ===================================================
 
 /* Auth User module. */
 const authenticateToken = (req, res, next) => {
-  // ===== INSTRUMENTATION 1: Log authentication attempt =====
+  // ===== INSTRUMENTATION 2: Log authentication attempt =====
   console.log('[AUTH] Authentication attempt:', {
     path: req.path,
     method: req.method,
@@ -22,7 +22,7 @@ const authenticateToken = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1];
 
   if (token == null){
-    // ===== INSTRUMENTATION 2: Log missing token =====
+    // ===== INSTRUMENTATION 3: Log missing token =====
     console.log('[AUTH] Authentication failed: No token provided');
     // ================================================
     return res.sendStatus(401);
@@ -30,7 +30,7 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.API_SECRET, (error, user) => {
     if (error) {
-      // ===== INSTRUMENTATION 3: Enhanced error logging =====
+      // ===== INSTRUMENTATION 4: Enhanced error logging =====
       console.log('[AUTH] JWT verification failed:', {
         error: error.message,
         errorType: error.name,
@@ -42,7 +42,7 @@ const authenticateToken = (req, res, next) => {
 
     User.findOne({_id: user.id}).then(userFound => {
       if (!userFound) {
-        // ===== INSTRUMENTATION 4: Log user not found =====
+        // ===== INSTRUMENTATION 5: Log user not found =====
         console.log('[AUTH] User not found in database:', {
           userId: user.id,
           timestamp: new Date().toISOString()
@@ -51,7 +51,7 @@ const authenticateToken = (req, res, next) => {
         return res.status(403).send({"message": "Unauthorized access."});
       }
 
-      // ===== INSTRUMENTATION 5: Assert and success logging =====
+      // ===== INSTRUMENTATION 6: Assert and success logging =====
       assert(userFound.role, 'User must have a role');
       console.log('[AUTH] Authentication successful:', {
         userId: user.id,
