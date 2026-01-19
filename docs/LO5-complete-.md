@@ -483,12 +483,6 @@ Coverage Summary:
 
 ## 5.4 CI Pipeline Demonstration
 
-### GitHub Actions Execution Evidence
-
-**Repository:** https://github.com/PuneArchduke/st-portfolio-s2286959
-**Workflow:** Software Testing CI Pipeline
-**Run #4:** Success
-
 ### Execution Timeline
 
 | Step | Status | Duration |
@@ -532,12 +526,6 @@ Time:        8.234s
 | Artifact | Description | Retention |
 |----------|-------------|-----------|
 | coverage-report | HTML coverage report with line-by-line analysis | 30 days |
-
-### Evidence Links
-
-- **Repository:** https://github.com/PuneArchduke/st-portfolio-s2286959
-- **Actions Tab:** https://github.com/PuneArchduke/st-portfolio-s2286959/actions
-- **Workflow File:** `.github/workflows/ci.yml`
 
 ---
 
