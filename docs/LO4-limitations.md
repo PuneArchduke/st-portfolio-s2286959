@@ -98,12 +98,12 @@ it('should prevent non-admin from deleting users', async () => {
 **Current Test Distribution:**
 | Order Operation | Test Coverage | Notes |
 |-----------------|---------------|-------|
-| Create (Admin) | ✅ Tested | Via admin test suite |
-| Create (User) | ⚠ Partial | Limited scenarios |
-| Read Own Orders | ✅ Tested | Basic retrieval |
-| Read Others' Orders | ✅ Tested | Authorization verified |
-| Update Order | ⚠ Partial | 64.7% branch coverage |
-| Delete Order | ⚠ Partial | Edge cases missing |
+| Create (Admin) | Tested | Via admin test suite |
+| Create (User) | Partial | Limited scenarios |
+| Read Own Orders | Tested | Basic retrieval |
+| Read Others' Orders | Tested | Authorization verified |
+| Update Order | Partial | 64.7% branch coverage |
+| Delete Order | Partial | Edge cases missing |
 
 **Why This Gap Exists:**
 - Authentication and security testing prioritized
@@ -220,10 +220,10 @@ it('should handle concurrent registrations safely', async () => {
 **Observed Single-Request Performance (from instrumentation):**
 | Endpoint | Observed Time | Target |
 |----------|--------------|--------|
-| POST /login | ~50-100ms | <500ms ✅ |
-| POST /register | ~100-200ms | <500ms ✅ |
-| GET /orders/all | ~50-100ms | <500ms ✅ |
-| POST /order | ~100-150ms | <500ms ✅ |
+| POST /login | ~50-100ms | <500ms |
+| POST /register | ~100-200ms | <500ms |
+| GET /orders/all | ~50-100ms | <500ms |
+| POST /order | ~100-150ms | <500ms |
 
 **What We Don't Know:**
 - Performance under 50 concurrent users (PR2)
@@ -327,14 +327,14 @@ it('should handle database connection failure gracefully', async () => {
 
 | Feature | Test Coverage | Confidence | Production Ready? |
 |---------|--------------|------------|-------------------|
-| User Registration | 73.91% stmt | High | ✅ Yes |
-| User Authentication | 92.3% stmt | Very High | ✅ Yes |
-| JWT Token Handling | 80% branch | High | ✅ Yes |
-| Order Creation | 77.33% stmt | Medium | ⚠ With caution |
-| Order Management | 64.7% branch | Medium | ⚠ Needs more testing |
-| Admin Operations | Partial | Medium | ⚠ Edge cases untested |
-| Concurrent Load | Not tested | Low | ❌ Requires testing |
-| Fault Tolerance | Not tested | Low | ❌ Requires testing |
+| User Registration | 73.91% stmt | High | Yes |
+| User Authentication | 92.3% stmt | Very High | Yes |
+| JWT Token Handling | 80% branch | High | Yes |
+| Order Creation | 77.33% stmt | Medium | With caution |
+| Order Management | 64.7% branch | Medium | Needs more testing |
+| Admin Operations | Partial | Medium | Edge cases untested |
+| Concurrent Load | Not tested | Low | Requires testing |
+| Fault Tolerance | Not tested | Low | Requires testing |
 
 ---
 
@@ -343,31 +343,31 @@ it('should handle database connection failure gracefully', async () => {
 ### Achievement Summary
 
 **Achieved:**
-- ✅ 42 tests, 100% pass rate
-- ✅ 79.22% statement coverage (near 80% target)
-- ✅ 90.9% function coverage (exceeds 80% target)
-- ✅ Critical authentication path: 92.3% coverage
-- ✅ Security requirements (SR1, SR2, SR4) validated
-- ✅ Registration edge cases thoroughly tested
+-  42 tests, 100% pass rate
+-  79.22% statement coverage (near 80% target)
+-  90.9% function coverage (exceeds 80% target)
+-  Critical authentication path: 92.3% coverage
+-  Security requirements (SR1, SR2, SR4) validated
+-  Registration edge cases thoroughly tested
 
 **Not Achieved:**
-- ❌ Branch coverage: 66.66% (target: 75%)
-- ❌ Concurrency testing not executed
-- ❌ Performance load testing not executed
-- ❌ Fault tolerance not tested
+-  Branch coverage: 66.66% (target: 75%)
+-  Concurrency testing not executed
+-  Performance load testing not executed
+-  Fault tolerance not tested
 
 ### Comparison with Targets
 
 | Criterion | Target | Actual | Status |
 |-----------|--------|--------|--------|
-| Statement Coverage | 80% | 79.22% | ⚠ -0.78% |
-| Branch Coverage | 75% | 66.66% | ❌ -8.34% |
-| Function Coverage | 80% | 90.9% | ✅ +10.9% |
-| Test Pass Rate | 95%+ | 100% | ✅ Exceeded |
-| Auth Module Coverage | 90% | 92.3% | ✅ Exceeded |
-| Orders Module Coverage | 80% | 77.33% | ⚠ -2.67% |
-| Performance Validated | Yes | Partial | ⚠ Single-request only |
-| Concurrency Tested | Yes | No | ❌ Not done |
+| Statement Coverage | 80% | 79.22% | -0.78% |
+| Branch Coverage | 75% | 66.66% | -8.34% |
+| Function Coverage | 80% | 90.9% | +10.9% |
+| Test Pass Rate | 95%+ | 100% | Exceeded |
+| Auth Module Coverage | 90% | 92.3% | Exceeded |
+| Orders Module Coverage | 80% | 77.33% | -2.67% |
+| Performance Validated | Yes | Partial | Single-request only |
+| Concurrency Tested | Yes | No | Not done |
 
 ### Gap Prioritization for Remediation
 
@@ -418,10 +418,10 @@ it('should handle database connection failure gracefully', async () => {
 - Individual work (no team for parallel efforts)
 
 **Appropriate Scope:**
-- Core functional testing: ✅ Demonstrated competency
-- Coverage analysis: ✅ Real metrics collected
-- Gap identification: ✅ Honest assessment
-- Remediation planning: ✅ Concrete recommendations
+- Core functional testing: Demonstrated competency
+- Coverage analysis: Real metrics collected
+- Gap identification: Honest assessment
+- Remediation planning: Concrete recommendations
 
 **Would Require More Time/Resources:**
 - Full concurrency testing suite
@@ -433,11 +433,11 @@ it('should handle database connection failure gracefully', async () => {
 
 | Learning Objective | Evidence | Assessment |
 |-------------------|----------|------------|
-| LO1: Requirements Analysis | FR1-FR5, SR1-SR4 identified | ✅ Achieved |
-| LO2: Test Planning | Test plan with instrumentation | ✅ Achieved |
-| LO3: Testing Techniques | Multiple techniques applied | ✅ Achieved |
-| LO4: Limitations Evaluation | This document | ✅ Achieved |
-| LO5: CI/CD Review | Pipeline analysis | ✅ Achieved |
+| LO1: Requirements Analysis | FR1-FR5, SR1-SR4 identified | Achieved |
+| LO2: Test Planning | Test plan with instrumentation | Achieved |
+| LO3: Testing Techniques | Multiple techniques applied | Achieved |
+| LO4: Limitations Evaluation | This document | Achieved |
+| LO5: CI/CD Review | Pipeline analysis | Achieved |
 
 ---
 
@@ -493,12 +493,3 @@ The identified gaps are documented with specific remediation recommendations, ef
 The testing approach successfully validated core functionality while acknowledging realistic limitations. The combination of achieved results and honest gap analysis reflects the balance between academic constraints and professional standards in software testing practice.
 
 ---
-
-## References
-
-- Pezzè, M., & Young, M. (Updated) Chapter 9: Test Adequacy
-- Pezzè, M., & Young, M. (Updated) Chapter 20: Planning and Monitoring
-- ISO/IEC/IEEE 29119-2: Test Processes
-- Course Tutorial LO4: Evaluation of Testing (2025/6)
-- Coverage Report: coverage/index.html
-- Test Results: test-results.txt
