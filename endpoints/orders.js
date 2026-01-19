@@ -8,9 +8,9 @@ const User = user.User;
 const order = require("../models/order");
 const Order = order.Order;
 
-// ===== INSTRUMENTATION: Import assert module =====
+// ===== INSTRUMENTATION 1: Import assert module =====
 const assert = require('assert');
-// =================================================
+// ===================================================
 
 module.exports = (app) => {
 
@@ -18,7 +18,7 @@ module.exports = (app) => {
   app.get("/orders/user/:userID", authenticateToken, async (req, res) => {
     try {
 
-      // ===== INSTRUMENTATION 1: Log permission check =====
+      // ===== INSTRUMENTATION 2: Log permission check =====
       console.log('[ORDERS] Admin access check:', {
         userId: req.user.id,
         userRole: req.user.role,
@@ -30,9 +30,9 @@ module.exports = (app) => {
 
       // This is an admin-only operation.
       if(req.user.role !== "Admin") {
-        // ===== INSTRUMENTATION: Log permission denied =====
+        // ===== INSTRUMENTATION 3: Log permission denied =====
         console.log('[ORDERS] Access denied: Not admin');
-        // ==================================================
+        // ====================================================
         return res.status(403).json({
           "message": "Unauthorized Access."
         });
@@ -92,7 +92,7 @@ module.exports = (app) => {
   /* Add a new order. Admins can NOT add orders for other members. */
   app.post("/order", authenticateToken, async (req, res) => {
     try {
-      // ===== INSTRUMENTATION 2: Log order creation and performance timing =====
+      // ===== INSTRUMENTATION 4: Log order creation and performance timing =====
       const startTime = Date.now();
       console.log('[ORDERS] Creating new order:', {
         userId: req.user.id,
@@ -115,7 +115,7 @@ module.exports = (app) => {
       if(userExists) {
         const insertedOrder = await newOrder.save();
 
-        // ===== INSTRUMENTATION: Log creation success and performance =====
+        // ===== INSTRUMENTATION 5: Log creation success and performance =====
         const duration = Date.now() - startTime;
         console.log('[ORDERS] Order created successfully:', {
           orderId: insertedOrder._id,
@@ -130,28 +130,28 @@ module.exports = (app) => {
             threshold: '500ms'
           });
         }
-        // =================================================================
+        // ===================================================================
 
         return res.status(201).json(insertedOrder);
       } else {
-        // ===== INSTRUMENTATION: Log user not found error =====
+        // ===== INSTRUMENTATION 6: Log user not found error =====
         console.log('[ORDERS] Order creation failed: User does not exist:', {
           userId: req.user.id,
           timestamp: new Date().toISOString()
         });
-        // =====================================================
+        // =======================================================
         return res.status(400).json({
           "message": "No user associated with order."
         });
       }
     } catch(error) {
-      // ===== INSTRUMENTATION: Enhanced error logging =====
+      // ===== INSTRUMENTATION 7: Enhanced error logging =====
       console.log('[ORDERS] Order creation error:', {
         error: error.message,
         userId: req.user.id,
         timestamp: new Date().toISOString()
       });
-      // ===================================================
+      // =====================================================
       return res.status(400).json({
         "message": "Bad Request."
       });
