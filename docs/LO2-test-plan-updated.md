@@ -158,10 +158,10 @@ All tests automated via npm scripts and GitLab CI:
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Test Pass Rate | 95%+ | 100% | ✅ Exceeded |
-| Statement Coverage | 80% | 79.22% | ⚠ Near target |
-| Branch Coverage | 75% | 66.66% | ❌ Below target |
-| Function Coverage | 80% | 90.9% | ✅ Exceeded |
+| Test Pass Rate | 95%+ | 100% | Exceeded |
+| Statement Coverage | 80% | 79.22% | Near target |
+| Branch Coverage | 75% | 66.66% | Below target |
+| Function Coverage | 80% | 90.9% | Exceeded |
 
 ---
 
@@ -586,13 +586,13 @@ Better approach: Centralized logger module with configuration
 
 | Aspect | Current State | Best Practice | Gap |
 |--------|--------------|---------------|-----|
-| Structured logging | ✅ JSON format | ✅ JSON format | None |
-| Timestamps | ✅ ISO format | ✅ ISO format | None |
-| Log levels | ❌ Not used | ✅ DEBUG/INFO/WARN/ERROR | Needs improvement |
-| Environment toggle | ❌ Always on | ✅ Configurable | Needs improvement |
-| Centralized config | ❌ Scattered | ✅ Single module | Needs improvement |
-| Performance timing | ✅ Implemented | ✅ Per-request timing | None |
-| Error context | ✅ Detailed | ✅ Stack traces | Partial |
+| Structured logging | JSON format | JSON format | None |
+| Timestamps | ISO format | ISO format | None |
+| Log levels | Not used | DEBUG/INFO/WARN/ERROR | Needs improvement |
+| Environment toggle | Always on | Configurable | Needs improvement |
+| Centralized config | Scattered | Single module | Needs improvement |
+| Performance timing | Implemented | Per-request timing | None |
+| Error context | Detailed | Stack traces | Partial |
 
 ### Recommendations for Improvement
 
@@ -609,12 +609,3 @@ Better approach: Centralized logger module with configuration
 4. Implement log rotation and retention policy
 
 ---
-
-## References
-
-- Pezzè, M., & Young, M. (Updated) Chapter 17: Test Execution (Scaffolding and Instrumentation)
-- Pezzè, M., & Young, M. (Updated) Chapter 20: Planning and Monitoring the Process
-- ISO/IEC/IEEE 29119-2: Test Processes
-- Course Tutorial LO2: Test Planning (2025/6)
-- Node.js Assert Documentation: https://nodejs.org/api/assert.html
-- Actual instrumented files: endpoints/auth.js, endpoints/orders.js
