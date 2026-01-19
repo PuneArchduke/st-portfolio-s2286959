@@ -429,12 +429,12 @@ Coverage is collected using Istanbul/nyc:
 
 | Aspect | Automated? | Tool |
 |--------|------------|------|
-| Unit tests | ✅ Yes | Jest |
-| Integration tests | ✅ Yes | Jest + Supertest |
-| Coverage collection | ✅ Yes | Istanbul/nyc |
-| Coverage reporting | ⚠️ Local only | HTML report |
-| Performance tests | ⚠️ Configured | Artillery (not executed) |
-| Security scanning | ❌ No | - |
+| Unit tests | Yes | Jest |
+| Integration tests | Yes | Jest + Supertest |
+| Coverage collection | Yes | Istanbul/nyc |
+| Coverage reporting | Local only | HTML report |
+| Performance tests | Configured | Artillery (not executed) |
+| Security scanning | No | - |
 
 ### Test Results (from local execution)
 
@@ -558,19 +558,19 @@ This alternative does not require Docker-in-Docker and would work with shared ru
 
 | Criterion | Assessment |
 |-----------|------------|
-| Review criteria applied | ✅ 5 criteria: correctness, security, maintainability, error handling, performance |
-| Code examined | ✅ auth.js, orders.js, users.js |
-| Issues identified | ✅ 10 issues found (3 critical, 4 medium, 3 low) |
-| Recommendations provided | ✅ Prioritized fix list with effort estimates |
+| Review criteria applied | 5 criteria: correctness, security, maintainability, error handling, performance |
+| Code examined | auth.js, orders.js, users.js |
+| Issues identified | 10 issues found (3 critical, 4 medium, 3 low) |
+| Recommendations provided | Prioritized fix list with effort estimates |
 
 ### CI Pipeline (5.2-5.4)
 
 | Criterion | Assessment |
 |-----------|------------|
-| Pipeline constructed | ✅ 5-stage Docker-based pipeline |
-| Testing automated | ✅ 42 tests automated via npm |
-| Coverage automated | ✅ Istanbul/nyc integration |
-| Pipeline demonstration | ⚠️ Stuck due to runner unavailability; local execution as alternative |
+| Pipeline constructed | 5-stage Docker-based pipeline |
+| Testing automated | 42 tests automated via npm |
+| Coverage automated | Istanbul/nyc integration |
+| Pipeline demonstration | Stuck due to runner unavailability; local execution as alternative |
 
 ### Lessons Learned
 
@@ -580,11 +580,3 @@ This alternative does not require Docker-in-Docker and would work with shared ru
 4. **Documentation is key** - Evidence collected despite pipeline issues
 
 ---
-
-## References
-
-- Pezzè, M., & Young, M. (Updated) Chapter 23: Automation
-- Pezzè, M., & Young, M. (Updated) Chapter 24: Documentation
-- GitLab CI/CD Documentation: https://docs.gitlab.com/ee/ci/
-- Course Tutorial LO5: Reviews and CI/CD (2025/6)
-- Repository: https://git.ecdf.ed.ac.uk/s2286959/st-portfolio-s2286959
