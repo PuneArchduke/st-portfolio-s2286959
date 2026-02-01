@@ -62,22 +62,8 @@ Before analyzing gaps, here are the actual metrics achieved:
 1. Analyze uncovered branches in coverage HTML report
 2. Create targeted test cases for each uncovered branch
 3. Focus on orders.js and users.js conditional paths
-4. Example additional tests needed:
-```javascript
-// Test uncovered branch: Order update with invalid ID
-it('should return 404 for updating non-existent order', async () => {
-  const response = await request.put('/order/invalid-id').send(updateData);
-  expect(response.status).toBe(404);
-});
-
-// Test uncovered branch: User deletion without admin role
-it('should prevent non-admin from deleting users', async () => {
-  const response = await request.delete('/user/123').set('Authorization', userToken);
-  expect(response.status).toBe(403);
-});
-```
-5. Estimated effort: 4-5 hours
-6. Expected improvement: Branch coverage → 75-80%
+4. Estimated effort: 4-5 hours
+5. Expected improvement: Branch coverage → 75-80%
 
 ---
 
@@ -253,7 +239,6 @@ it('should handle database connection failure gracefully', async () => {
 | Gap | Severity | Likelihood | Risk Level | Business Impact |
 |-----|----------|------------|------------|-----------------|
 | Branch coverage gap | Medium | Medium | Medium | Edge case bugs may ship |
-| Order management incomplete | Medium | High | Medium-High | User workflow issues |
 | No concurrency testing | High | Medium | High | Data corruption possible |
 | Limited performance testing | Medium | Low | Medium | Scalability unknown |
 | No fault tolerance testing | High | Low | Medium | Production outages |
@@ -311,10 +296,9 @@ it('should handle database connection failure gracefully', async () => {
 | Priority | Gap | Effort | Impact | Recommendation |
 |----------|-----|--------|--------|----------------|
 | 1 | Branch coverage | 4-5 hrs | High | Target uncovered branches in orders.js, users.js |
-| 2 | Order management tests | 4-6 hrs | High | Create dedicated user order test suite |
-| 3 | Performance load testing | 3-4 hrs | Medium | Setup Docker, run Artillery |
-| 4 | Concurrency testing | 6-8 hrs | High | Implement concurrent request scenarios |
-| 5 | Fault tolerance | 5-6 hrs | Medium | Add failure injection tests |
+| 2 | Performance load testing | 3-4 hrs | Medium | Setup Docker, run Artillery |
+| 3 | Concurrency testing | 6-8 hrs | High | Implement concurrent request scenarios |
+| 4 | Fault tolerance | 5-6 hrs | Medium | Add failure injection tests |
 
 **Total estimated effort for full remediation: 22-29 hours**
 
