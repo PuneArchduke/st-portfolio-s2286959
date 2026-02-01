@@ -1,10 +1,10 @@
 # LO1: Requirements Analysis and Testing Strategies
 
-## 1.1 Range of Requirements
+## 1 Range of Requirements
 
 This food ordering system provides user authentication, role-based access control, and order management functionality. The requirements are categorized into functional, performance, security, and quality attributes as recommended by ISO/IEC/IEEE 29119-1.
 
-### Functional Requirements
+### 1.1 Functional Requirements
 
 **FR1: User Registration and Authentication**
 - Description: Users must register with email and password, then authenticate using JWT tokens
@@ -37,7 +37,7 @@ This food ordering system provides user authentication, role-based access contro
 - Stakeholders: Administrators, users
 - Priority: Medium
 
-### Performance Requirements
+### 1.2 Performance Requirements
 
 **PR1: API Response Time**
 - Description: API endpoints should respond within 500ms under normal load
@@ -53,7 +53,7 @@ This food ordering system provides user authentication, role-based access contro
 - Priority: Medium
 - Test approach: Artillery concurrent connection testing
 
-### Security Requirements
+### 1.3 Security Requirements
 
 **SR1: Password Encryption**
 - Description: User passwords must be encrypted using Bcrypt before storage
@@ -84,7 +84,7 @@ This food ordering system provides user authentication, role-based access contro
 - Priority: High
 - Test approach: Integration testing with different user roles
 
-### Quality Attributes (Qualitative Requirements)
+### 1.4 Quality Attributes (Qualitative Requirements)
 
 **QR1: Maintainability**
 - Description: Code should follow consistent naming conventions and structure
@@ -100,9 +100,9 @@ This food ordering system provides user authentication, role-based access contro
 
 ---
 
-## 1.2 Level of Requirements
+## 2 Level of Requirements
 
-### System-Level Testing
+### 2.1 System-Level Testing
 
 **End-to-End User Flows:**
 - Complete registration → login → order placement → order retrieval flow
@@ -114,7 +114,7 @@ This food ordering system provides user authentication, role-based access contro
 - Test complete API request-response cycles
 - Verify database state changes after operations
 
-### Integration-Level Testing
+### 2.2 Integration-Level Testing
 
 **Module Interactions:**
 1. **Authentication Middleware + Route Handlers**
@@ -136,7 +136,7 @@ This food ordering system provides user authentication, role-based access contro
 - Mock external dependencies where appropriate
 - Test error propagation between layers
 
-### Unit-Level Testing
+### 2.3 Unit-Level Testing
 
 **Individual Functions:**
 1. **Authentication Functions**
@@ -162,41 +162,21 @@ This food ordering system provides user authentication, role-based access contro
 
 ---
 
-## 1.3 Test Approach Selection using Category-Partition Method
+## 3 Test Approach Selection using Category-Partition Method
 
 ### Application of Category-Partition Testing (CAT)
 
 Following the systematic approach from Pezze & Young Ch.11, I apply CAT to the order placement endpoint as an exemplar.
 
-#### Step 1: Identify Independently Testable Features
-
-**Feature: Order Placement (POST /api/orders)**
-
-**Parameters:**
-- userId (from JWT token)
-- orderItems (array of Box1/Box2)
-- quantities (number for each item)
-
-**Environment Elements:**
-- Authentication state (valid token, invalid token, no token)
-- User role (User, Admin)
-- Database state (user exists, user doesn't exist)
-
-#### Step 2: Identify Categories and Values
-
-**Parameter: orderItems**
-
-*Category: Item Type*
-- Valid values: ["Box1"], ["Box2"], ["Box1", "Box2"]
+*Category: Order type*
+- Valid values: ["Box1"], ["Box2"]
 - Boundary: Empty array [] [error]
 - Invalid: ["Box3"] [error], ["InvalidItem"] [error]
 
-*Category: Quantity*
-- Valid: 1, 5, 10 (normal range)
-- Boundary: 0 [error], 100 (upper limit)
-- Invalid: -1 [error], "abc" [error], null [error]
-
-**Environment: Authentication**
+*Category: Order description*
+- Valid: "Test Order" (Valid String)
+- Boundary: Empty String "" [error]
+- Invalid: null [error], undefined [error]
 
 *Category: JWT Token*
 - Valid token (authenticated user)
@@ -204,17 +184,9 @@ Following the systematic approach from Pezze & Young Ch.11, I apply CAT to the o
 - Malformed token [error]
 - Missing token [error]
 
-*Category: User Role*
-- Regular User
-- Admin
-
-**Environment: Database State**
-
 *Category: User Existence*
 - User exists in database
 - User doesn't exist [error]
-
-#### Step 3: Apply Constraints
 
 **Error Constraint:**
 - If any parameter has [error] value, generate only 1 test case for that combination
@@ -223,24 +195,6 @@ Following the systematic approach from Pezze & Young Ch.11, I apply CAT to the o
 **Single Constraint:**
 - Test malformed token only once [single]
 - Test missing token only once [single]
-
-#### Resulting Test Cases (Sample)
-
-Without constraints: 3 × 4 × 4 × 2 × 2 = 192 potential combinations
-
-With constraints: Reduced to approximately 18 core test cases:
-
-1. Valid token + Valid user + Box1 × 1 → Success
-2. Valid token + Valid user + Box2 × 5 → Success
-3. Valid token + Valid user + Both boxes → Success
-4. Valid token + Valid user + Empty items → Error 400
-5. Valid token + Valid user + Quantity 0 → Error 400
-6. Valid token + Valid user + Negative quantity → Error 400
-7. Valid token + User doesn't exist → Error 404
-8. Expired token + Any order → Error 401 [single]
-9. Malformed token + Any order → Error 401 [single]
-10. Missing token + Any order → Error 401 [single]
-... (additional boundary cases)
 
 ### Test Techniques Mapping
 
@@ -321,29 +275,5 @@ While CAT identifies main categories, some edge cases may be missed:
 
 *Impact:* Low - Unlikely but possible input scenarios
 *Mitigation:* Fuzz testing with random input generation
-
-### Justification of Trade-offs
-
-Given the academic context and time constraints (~100 hours total for the coursework):
-
-**Prioritization Decision:**
-1. **Core functional correctness** (FR1-FR5) → Highest priority
-2. **Basic security** (SR1-SR4) → High priority  
-3. **Performance baselines** (PR1-PR2) → Medium priority
-4. **Advanced scenarios** (concurrency, fault tolerance) → Deferred
-
-**Rationale:**
-The selected approach provides a solid foundation for demonstrating testing competency while acknowledging realistic limitations. The focus on CAT methodology and multi-level testing showcases understanding of systematic testing principles. The identified gaps demonstrate critical thinking about testing limitations rather than claiming comprehensive coverage.
-
-In a production environment, the deferred items (especially concurrency and fault tolerance) would require dedicated effort. However, for demonstrating academic learning outcomes, the chosen approach balances breadth of techniques with depth of application.
-
-### Alignment with ISO/IEC/IEEE 29119 Standards
-
-The approach aligns with ISO 29119-2 in:
-- Identifying test basis (requirements FR1-SR4)
-- Defining test model (CAT categories and values)
-- Specifying test completion criteria (coverage targets, performance thresholds)
-
-The weaknesses identified (concurrency, fault tolerance) would be addressed in a full ISO 29119-compliant test plan but are consciously deferred given project scope constraints.
 
 ---
