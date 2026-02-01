@@ -217,14 +217,6 @@ it('should handle concurrent registrations safely', async () => {
 - Performance instrumentation logs show individual request times
 - No aggregated performance metrics collected
 
-**Observed Single-Request Performance (from instrumentation):**
-| Endpoint | Observed Time | Target |
-|----------|--------------|--------|
-| POST /login | ~50-100ms | <500ms |
-| POST /register | ~100-200ms | <500ms |
-| GET /orders/all | ~50-100ms | <500ms |
-| POST /order | ~100-150ms | <500ms |
-
 **What We Don't Know:**
 - Performance under 50 concurrent users (PR2)
 - p95/p99 response times under load
