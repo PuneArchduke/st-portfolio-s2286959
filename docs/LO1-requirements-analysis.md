@@ -212,7 +212,7 @@ Following the systematic approach from Pezze & Young Ch.11, I apply CAT to the o
 
 ---
 
-## 1.4 Assessment of Testing Approach Appropriateness
+## 4 Assessment of Testing Approach Appropriateness
 
 ### Strengths
 
