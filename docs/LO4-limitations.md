@@ -81,64 +81,7 @@ it('should prevent non-admin from deleting users', async () => {
 
 ---
 
-### Gap 2: Order Management Testing Incomplete
-
-**What's Missing:**
-- User-level order creation workflow not comprehensively tested
-- Order update operations have 64.7% branch coverage
-- Order deletion scenarios partially covered
-- Order item validation (Box1, Box2, quantities) not exhaustively tested
-- Order history pagination not tested
-
-**Evidence:**
-- orders.js: 77.33% statement coverage, 64.7% branch coverage
-- Admin order tests exist but user-perspective tests limited
-- No dedicated `api.orders.test.js` file for user order workflows
-
-**Current Test Distribution:**
-| Order Operation | Test Coverage | Notes |
-|-----------------|---------------|-------|
-| Create (Admin) | Tested | Via admin test suite |
-| Create (User) | Partial | Limited scenarios |
-| Read Own Orders | Tested | Basic retrieval |
-| Read Others' Orders | Tested | Authorization verified |
-| Update Order | Partial | 64.7% branch coverage |
-| Delete Order | Partial | Edge cases missing |
-
-**Why This Gap Exists:**
-- Authentication and security testing prioritized
-- Time constraints in 100-hour coursework
-- Admin tests cover some order paths indirectly
-- User order workflow considered lower priority
-
-**Impact:**
-- Medium severity: Core business logic (FR3, FR4) less validated
-- User-facing order bugs might go undetected
-- Order item validation gaps could cause production issues
-
-**How to Remedy:**
-1. Create dedicated test file: `__tests__/api/api.orders.test.js`
-2. Implement comprehensive user order tests:
-```javascript
-describe('User Order Operations', () => {
-  it('should create order with Box1 items', async () => { ... });
-  it('should create order with Box2 items', async () => { ... });
-  it('should create order with mixed items', async () => { ... });
-  it('should reject order with invalid items', async () => { ... });
-  it('should reject order with zero quantity', async () => { ... });
-  it('should reject order with negative quantity', async () => { ... });
-  it('should retrieve own orders only', async () => { ... });
-  it('should update own order', async () => { ... });
-  it('should delete own order', async () => { ... });
-  it('should prevent access to others orders', async () => { ... });
-});
-```
-3. Estimated effort: 4-6 hours
-4. Expected improvement: orders.js coverage → 85-90%
-
----
-
-### Gap 3: No Concurrency Testing
+### Gap 2: No Concurrency Testing
 
 **What's Missing:**
 - Concurrent user operations not tested
@@ -197,7 +140,7 @@ it('should handle concurrent registrations safely', async () => {
 
 ---
 
-### Gap 4: Limited Performance Testing Execution
+### Gap 3: Limited Performance Testing Execution
 
 **What's Missing:**
 - Artillery load tests not executed (Docker environment required)
@@ -253,7 +196,7 @@ npm run report
 
 ---
 
-### Gap 5: No Error Recovery and Fault Tolerance Testing
+### Gap 4: No Error Recovery and Fault Tolerance Testing
 
 **What's Missing:**
 - Database connection failure handling not tested
