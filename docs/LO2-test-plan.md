@@ -2,21 +2,6 @@
 
 ## 2.1 Construction of the Test Plan
 
-### Test-Driven Development Approach
-
-This project adopts a Test-Driven Development (TDD) methodology as recommended in Pezzè & Young Ch.20 and the course materials. TDD ensures that tests are written before implementation code, making tests serve as executable specifications.
-
-### TDD Workflow
-
-The testing approach follows this iterative cycle:
-
-1. **Write Test First** → Define expected behavior
-2. **Run Test (Fails)** → Verify test catches missing functionality
-3. **Write Minimal Code** → Implement just enough to pass
-4. **Run Test (Passes)** → Verify implementation works
-5. **Refactor** → Improve code quality while maintaining passing tests
-6. **Repeat** → Move to next requirement
-
 ### Test Plan Evolution
 
 The test plan evolved alongside development requirements identified in LO1:
