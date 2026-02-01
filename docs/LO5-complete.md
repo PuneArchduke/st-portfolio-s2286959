@@ -137,41 +137,7 @@ const ErrorResponses = {
 
 ---
 
-**Issue 6: No Input Validation for Order Data**
-
-```javascript
-// Current code - directly uses req.body without validation
-const newOrder = new Order({
-  user: req.user.id,
-  items: req.body.items,  // No validation!
-  // ...
-});
-```
-
-**Problem:** Missing validation for order items (Box1/Box2), quantities
-**Severity:** High (Security & Correctness)
-**Recommendation:** Add input validation before creating orders.
-
-```javascript
-const validateOrderInput = (items) => {
-  if (!Array.isArray(items) || items.length === 0) {
-    return { valid: false, error: "Items must be a non-empty array" };
-  }
-  for (const item of items) {
-    if (!['Box1', 'Box2'].includes(item.type)) {
-      return { valid: false, error: `Invalid item type: ${item.type}` };
-    }
-    if (!Number.isInteger(item.quantity) || item.quantity <= 0) {
-      return { valid: false, error: "Quantity must be a positive integer" };
-    }
-  }
-  return { valid: true };
-};
-```
-
----
-
-**Issue 7: Missing Transaction for Order Operations**
+**Issue 6: Missing Transaction for Order Operations**
 
 ```javascript
 // Current: No transaction wrapper
@@ -199,7 +165,7 @@ try {
 
 ---
 
-**Issue 8: No Pagination for Order Listing**
+**Issue 7: No Pagination for Order Listing**
 
 ```javascript
 // Current: Returns all orders
@@ -227,7 +193,7 @@ const allOrders = await Order.find({user: userID})
 
 #### Review Findings
 
-**Issue 9: Password Not Validated for Strength**
+**Issue 8: Password Not Validated for Strength**
 
 ```javascript
 // Current: Only checks if password exists
@@ -247,26 +213,6 @@ const validatePassword = (password) => {
   if (!/[0-9]/.test(password)) return "Password must contain a number";
   return null; // valid
 };
-```
-
----
-
-**Issue 10: Email Not Normalized**
-
-```javascript
-// Current: Email stored as-is
-const newUser = new User({
-  email: req.body.email,  // "User@Example.COM" stored differently from "user@example.com"
-  // ...
-});
-```
-
-**Problem:** Same email with different casing could create duplicate accounts
-**Severity:** Medium
-**Recommendation:** Normalize email before storage (toLowerCase, trim).
-
-```javascript
-const normalizedEmail = req.body.email.toLowerCase().trim();
 ```
 
 ---
@@ -449,7 +395,7 @@ Coverage is collected using Istanbul/nyc:
 ```json
 // package.json scripts
 {
-  "test": "jest --coverage",
+  "test": "jest --setupFiles dotenv/config --forceExit && node db-cleanup.js",
   "test:coverage": "nyc --reporter=html --reporter=text npm test"
 }
 ```
